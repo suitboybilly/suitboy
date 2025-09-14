@@ -497,7 +497,7 @@ a:active {
         <div class="modal-content">
             <div id="modalResult" class="image-container">
                 <img id="resultImage" src="" alt="Image" />
-                <img id="frameImage" src="https://suitboy.net/data/frame.png" alt="Frame" class="frame" />
+                <img id="frameImage" src="frame.png" alt="Frame" class="frame" />
             </div>
             <div class="rank-text">Rarity Rank #<span id="rankValue"></span></div> <!-- RANK 텍스트가 표시될 부분 -->
             <div class="button-container">
@@ -553,7 +553,7 @@ a:active {
             const shareButton = document.getElementById('shareTwitter');
             shareButton.onclick = function() {
                 const text = `👔My @SuitboyBilly Rarity Rank is #${rank}!🔔Bellscoin Forever!`;
-                const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(shareUrl)}`;
+                const twitterUrl = `https://x.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(shareUrl)}`;
                 
                 window.open(twitterUrl, '_blank'); // 새 창으로 트위터 열기
             };
