@@ -482,99 +482,6 @@ a:active {
         </div>
     </header>
     <br>
-    <div class="single-container" id="more">
-        <h2>Check Rarity Rank</h2>
-    </div>
-    <div class="container">
-    <form id="rankForm">
-        <label for="id">Put Your Suitboy Billy - Bellinals Inscription ID</label>
-        <input type="text" id="id" name="id" required>
-        <button type="submit">Submit</button>
-    </form>
-    </div>
-    <!-- Modal Structure -->
-    <div id="rankModal" class="modal">
-        <div class="modal-content">
-            <div id="modalResult" class="image-container">
-                <img id="resultImage" src="" alt="Image" />
-                <img id="frameImage" src="frame.png" alt="Frame" class="frame" />
-            </div>
-            <div class="rank-text">Rarity Rank #<span id="rankValue"></span></div> <!-- RANK 텍스트가 표시될 부분 -->
-            <div class="button-container">
-                <button id="shareTwitter">Share on Twitter</button>
-            </div>
-            <span class="close-button" id="closeModal">&times;</span>
-        </div>
-    </div>    
-    
-    <script>
-        document.getElementById('rankForm').addEventListener('submit', function(event) {
-            event.preventDefault(); // 기본 제출 이벤트 방지
-            
-            const inputId = document.getElementById('id').value; // 사용자 ID 가져오기
-            
-            fetch('/api/rank', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ id: inputId }) // 요청 본문에 ID 추가
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok'); // 네트워크 오류 처리
-                }
-                return response.json(); // JSON으로 변환
-            })
-            .then(data => {
-                const modal = document.getElementById('rankModal');
-                const resultImage = document.getElementById('resultImage'); // 랭크 이미지를 보여줄 img 요소
-                const rankValue = document.getElementById('rankValue'); // RANK 값을 보여줄 span 요소
-                
-                if (data.rank) {
-                    resultImage.src = data.image_url; // 랭크 이미지 설정
-                    rankValue.textContent = data.rank; // RANK 값 설정
-                    modal.style.display = "block"; // 모달 표시
-                    setupTwitterShareButton(data.rank, data.share_url); // 트위터 공유 버튼 설정
-                } else {
-                    resultImage.src = ''; // 랭크 이미지 초기화
-                    rankValue.textContent = ''; // RANK 값 초기화
-                    modal.style.display = "block"; // 모달 표시
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('An error occurred. Please try again.'); // 사용자에게 오류 알림
-            });
-        });
-        
-        // 트위터 공유 버튼 클릭 이벤트 설정
-        function setupTwitterShareButton(rank, shareUrl) {
-            const shareButton = document.getElementById('shareTwitter');
-            shareButton.onclick = function() {
-                const text = `👔My @SuitboyBilly Rarity Rank is #${rank}!🔔Bellscoin Forever!`;
-                const twitterUrl = `https://x.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(shareUrl)}`;
-                
-                window.open(twitterUrl, '_blank'); // 새 창으로 트위터 열기
-            };
-        }
-        
-        // 모달 닫기 버튼 클릭 시 모달 닫기
-        document.getElementById('closeModal').addEventListener('click', function() {
-            document.getElementById('rankModal').style.display = "none"; // 모달 숨기기
-        });
-        
-        // 모달 외부 클릭 시 닫기
-        window.onclick = function(event) {
-            const modal = document.getElementById('rankModal');
-            if (event.target === modal) {
-                modal.style.display = "none"; // 모달 숨기기
-            }
-        };
-        </script>
-        
-        
-    
     <style>
          .wallet, .goals {
             padding: 10px;
@@ -731,11 +638,10 @@ button:hover {
                 <img src="data/suitboy.webp" alt="Body Image">
             </div>
             <div class="text-area">
-                <p> This is the collection of 10K PFPs on Bellinals, created by Dr. Beltoshi from the Bellscoin community.</p>
-                <br>
+
                 <p> Inspired by 'Animal Crossing', these quirky characters sometimes mix with animals. Why the suits, you ask? To keep things classy in the memecoin world, which can be a bit rude sometimes.</p>
                 <br>
-                <p> Now, just a heads up—this collection isn’t an investment. The value might go to zero. But if everyone in the Bellscoin community could snag one and set it as their PFP, it would be amazing!</p>
+                <p> Now, just a heads up. this collection isn’t an investment. The value might go to zero. But if everyone in the Bellscoin community could snag one and set it as their PFP, it would be amazing!</p>
                 <br>
                 <p> Let’s spread the word about Bellscoin and have some fun with it!</p>
             </div>
