@@ -482,105 +482,6 @@ a:active {
         </div>
     </header>
     <br>
-    <div class="single-container">
-        <h2>'Make Billy Milly' Project</h2></div>
-    <div class="container">
-        <div class="grid-2-col">
-        <div class="wallet">
-            <p><h1><span id="walletAddress">BillyM2K's Bells Wallet</span></h1>
-            <div class="m2k"><img src="data/m2k.png"></div>
-            <p><button class="copy-btn" onclick="copyToClipboard()">Copy</button><span id="walletAddress">B5imYR6AdW27QbG4NGgijv4SA4F88iQVPz</span></p>
-            <p><h2><span id="usdBalance">Loading...</span></h2></p>
-            <p><span id="bellBalance">Loading...</span></p>
-            <h1>How to Make Billy Milly?</h1>
-            <h3>
-            <ol>
-                <li>Buy and Hold $BELLS</li>
-                <li>Donate some $BELLS to Billy</li>
-                <li>Spread awareness of $BELLS on X</li>
-            </ol>
-            </h3>
-        </div>
-        <div class="goals">
-            <h1>Now, Billy Can Buy</h1>
-            <div class="tier-container">
-                <div class="tier" data-goal="10000000">Luxury Yacht ($1,000,000)</div>
-                <div class="tier" data-goal="1000000">Nice House ($500,000)</div>
-                <div class="tier" data-goal="230000">Lamborghini Urus ($230,000)</div>
-                <div class="tier" data-goal="75000">Tesla Model S ($75,000)</div>
-                <div class="tier" data-goal="25000">Honda Civic ($23,000) </div>
-            </div>
-        </div>
-        </div>
-    </div>
-    <script>
-        function copyToClipboard() {
-            const text = "B5imYR6AdW27QbG4NGgijv4SA4F88iQVPz";
-            navigator.clipboard.writeText(text).then(() => {
-                alert('Copy: ' + text);
-            }).catch(err => {
-                console.error('fail:', err);
-            });
-        }
-    </script>
-    <script>
-        async function fetchData() {
-            try {
-                // 첫 번째 API에서 Billy의 BELL 잔액 불러오기
-                const balanceRes = await fetch('https://electrs.nintondo.io/api/address/B5imYR6AdW27QbG4NGgijv4SA4F88iQVPz');
-                
-                if (!balanceRes.ok) throw new Error(`Balance API request failed with status ${balanceRes.status}`);
-                
-                const balanceData = await balanceRes.json();
-                const satoshiBalance = balanceData.chain_stats.funded_txo_sum;
-                
-                if (typeof satoshiBalance === 'undefined') {
-                    throw new Error("`funded_txo_sum` not found in the balance API response.");
-                }
-                
-                const bellBalance = satoshiBalance / 1e8;  // Satoshi to BELLS 단위로 변환
-                
-                // 두 번째 API에서 BELL의 현재 가격 불러오기
-                const priceRes = await fetch('https://api.nintondo.io/api/stats/bells');
-                
-                if (!priceRes.ok) throw new Error(`Price API request failed with status ${priceRes.status}`);
-                
-                const priceData = await priceRes.json();
-                const bellPrice = priceData.price;
-                
-                if (typeof bellPrice === 'undefined') {
-                    throw new Error("`price` not found in the price API response.");
-                }
-
-                const usdBalance = bellBalance * bellPrice;
-
-                // 잔액 표시
-                document.getElementById('bellBalance').textContent = `${bellBalance.toFixed(2)} BELLS`;
-                document.getElementById('usdBalance').textContent = `$${usdBalance.toFixed(2)}`;
-
-                // 각 티어의 목표 금액에 도달했는지 확인하여 색상 변경
-                const tiers = document.querySelectorAll('.tier');
-                tiers.forEach(tier => {
-                    const goal = parseFloat(tier.getAttribute('data-goal'));
-                    if (usdBalance >= goal) {
-                        tier.classList.add('green'); // 목표 달성 시 녹색으로
-                    } else {
-                        tier.classList.remove('green'); // 목표 미달성 시 기본색으로
-                    }
-                });
-            } catch (error) {
-                console.error("Error fetching data:", error);
-                document.getElementById('usdBalance').textContent = 'Error';
-                document.getElementById('bellBalance').textContent = 'Error';
-            }
-        }
-
-        // 페이지 로드 시 데이터 가져오기
-        fetchData();
-        // 60초마다 데이터 갱신
-        setInterval(fetchData, 60000);
-    </script>
-    
     <div class="single-container" id="more">
         <h2>Check Rarity Rank</h2>
     </div>
@@ -933,7 +834,7 @@ button:hover {
     </div>
     <div class="container">
         <div class="single-container">
-            <h2>Suitboy Billy Memes</h2>
+            <h2>Memes</h2>
         </div>
         <div class="grid-2-col">
             <div class="body-image">
@@ -942,17 +843,6 @@ button:hover {
             <div class="body-image">
                 <img src="data/meme2.webp" alt="Body Image">
             </div>
-            <div class="body-image">
-                <img src="data/meme3.webp" alt="Body Image">
-            </div>
-            <div class="body-image">
-                <img src="data/meme4.webp" alt="Body Image">
-            </div>
-            <div class="body-image">
-                <img src="data/meme5.webp" alt="Body Image">
-            </div>
-            <div class="body-image">
-                <img src="data/meme6.webp" alt="Body Image">
             </div>
         </div>
     </div>
@@ -962,7 +852,7 @@ button:hover {
             <a href="https://discord.gg/vctd3N8eqP" target="_blank"><img src="data/discord.png" class="sub-text2"></a>
         </div>
         <div class="single-container">
-            <p>Memecoin culture continues.<br>Don't fade OG.</p>
+            <p>More memes are coming.</p>
         </div>
         <div class="full-width-image-container">
             <img src="data/end.webp" alt="End Image">
